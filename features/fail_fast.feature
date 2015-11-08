@@ -25,12 +25,12 @@ Feature: Fail fast
       """
       Feature:
 
-        Scenario: Failing      # features/a.feature:2
-          Given a failing step # features/step_definitions/cucumber_steps.js:2
-            fail
+        Scenario: Failing
+          Given a failing step
 
-      Failing scenarios:
-      features/a.feature:2 # Scenario: Failing
+      1) Failing # features/a.feature:2
+        Given a failing step # features/step_definitions/cucumber_steps.js:2
+          fail
 
       1 scenario (1 failed)
       1 step (1 failed)

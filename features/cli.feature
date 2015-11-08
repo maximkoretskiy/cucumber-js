@@ -32,7 +32,7 @@ Feature: Command line interface
     Given a file named "features/a.feature" with:
       """
       Feature: some feature
-        Scenario:
+        Scenario: some scenario
           When a step is undefined
       """
     When I run cucumber.js with `-f progress features/a.feature`
@@ -40,16 +40,16 @@ Feature: Command line interface
       """
       U
 
+      1) some scenario # features/a.feature
+        When a step is undefined
+          this.When(/^a step is undefined$/, function (callback) {
+            // Write code here that turns the phrase above into concrete actions
+            callback.pending();
+          });
+
       1 scenario (1 undefined)
       1 step (1 undefined)
       <duration-stat>
-
-      You can implement step definitions for undefined steps with these snippets:
-
-      this.When(/^a step is undefined$/, function (callback) {
-        // Write code here that turns the phrase above into concrete actions
-        callback.pending();
-      });
       """
     And the exit status should be 0
 
@@ -122,7 +122,7 @@ Scenario: run a single failing feature
     Given a file named "features/a.feature" with:
       """
       Feature: some feature
-        Scenario:
+        Scenario: some scenario
           When a step is failing
       """
     And a file named "features/step_definitions/cucumber_steps.js" with:
@@ -137,12 +137,9 @@ Scenario: run a single failing feature
       """
       F
 
-      (::) failed steps (::)
-
-      forced error
-
-      Failing scenarios:
-      features/a.feature:2 # Scenario:
+      1) some scenario # features/a.feature:2
+        When a step is failing # features/step_definitions/cucumber_steps.js:2
+          forced error
 
       1 scenario (1 failed)
       1 step (1 failed)
@@ -172,12 +169,9 @@ Scenario: run a single failing feature
       """
       F
 
-      (::) failed steps (::)
-
-      forced error
-
-      Failing scenarios:
-      features/a.feature:2 # Scenario:
+      1) some scenario # features/a.feature:2
+        When a step is failing # features/step_definitions/cucumber_steps.js:2
+          forced error
 
       1 scenario (1 failed)
       1 step (1 failed)
@@ -213,12 +207,9 @@ Scenario: run a single failing feature
       """
       F
 
-      (::) failed steps (::)
-
-      forced error
-
-      Failing scenarios:
-      features/a.feature:2 # Scenario:
+      1) some scenario # features/a.feature:2
+        When a step is failing # features/step_definitions/cucumber_steps.js:2
+          forced error
 
       1 scenario (1 failed)
       1 step (1 failed)

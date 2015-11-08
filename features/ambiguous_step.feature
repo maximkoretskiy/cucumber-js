@@ -3,8 +3,8 @@ Feature: Ambiguous Steps
   Scenario:
     Given a file named "features/a.feature" with:
       """
-      Feature:
-        Scenario:
+      Feature: a feature name
+        Scenario: a scenario name
           Given a ambiguous step
       """
     Given a file named "features/step_definitions/cucumber_steps.js" with:
@@ -20,14 +20,13 @@ Feature: Ambiguous Steps
       """
       A
 
+      1) a scenario name # features/a.feature:2
+        Given a ambiguous step
+          /^a ambiguous step$/ # features/step_definitions/cucumber_steps.js:2
+          /^a (.*) step$/      # features/step_definitions/cucumber_steps.js:3
+
       1 scenario (1 ambiguous)
       1 step (1 ambiguous)
       <duration-stat>
-
-      The following steps have multiple matching definitions:
-
-      "a ambiguous step" matches:
-      /^a ambiguous step$/ # features/step_definitions/cucumber_steps.js:2
-      /^a (.*) step$/      # features/step_definitions/cucumber_steps.js:3
       """
     And the exit status should be 1

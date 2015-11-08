@@ -95,13 +95,12 @@ Feature: Pretty Formatter
       """
       Feature: some feature
 
-        Scenario: I've declared one step and it is passing   # features/a.feature:3
-          Before                                             # features/support/hooks.js:2
-            Fail
-          Given This step is passing                         # features/step_definitions/cucumber_steps.js:2
+        Scenario: I've declared one step and it is passing
+          Given This step is passing
 
-      Failing scenarios:
-      features/a.feature:3 # Scenario: I've declared one step and it is passing
+      1) I've declared one step and it is passing # features/a.feature:3
+        Before # features/support/hooks.js:2
+          Fail
 
       1 scenario (1 failed)
       1 step (1 skipped)
