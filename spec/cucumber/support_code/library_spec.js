@@ -276,40 +276,6 @@ describe("Cucumber.SupportCode.Library", function () {
       it("exposes the World constructor", function () {
         expect(supportCodeHelper.World).toBeAFunction();
       });
-
-      it("exposes a method to register a listener", function () {
-        expect(supportCodeHelper.registerListener).toBeAFunction();
-      });
-
-      it("exposes a method to register a handler", function () {
-        expect(supportCodeHelper.registerHandler).toBeAFunction();
-      });
-
-      // parameterized test
-      for (var eventName in Cucumber.Listener.Events) {
-        if(!Cucumber.Listener.Events.hasOwnProperty(eventName))
-          continue;
-
-        /* jshint -W083 */
-        describe(eventName + ' event register handler method', function () {
-          beforeEach(function () {
-            spyOn(library, 'registerHandler');
-          });
-
-          it("is defined as a function", function () {
-            expect(supportCodeHelper[eventName]).toBeAFunction ();
-          });
-
-          it("calls registerHandler with the eventName", function () {
-            var handler = createSpy('handler');
-            supportCodeHelper[eventName](handler);
-            expect(library.registerHandler).toHaveBeenCalled();
-            expect(library.registerHandler).toHaveBeenCalledWithValueAsNthParameter(eventName, 1);
-            expect(library.registerHandler).toHaveBeenCalledWithValueAsNthParameter(handler, 2);
-          });
-        });
-        /* jshint +W083 */
-      }
     });
   });
 
@@ -372,55 +338,6 @@ describe("Cucumber.SupportCode.Library", function () {
         it("creates a step definition with the name, options, and code", function () {
           expect(Cucumber.SupportCode.StepDefinition).toHaveBeenCalledWith(name, options, code, jasmine.any(String), jasmine.any(Number));
         });
-      });
-    });
-  });
-
-  describe('Listener Support', function () {
-    beforeEach(function () {
-      library = Cucumber.SupportCode.Library(rawSupportCode);
-    });
-
-    describe('getListeners()', function () {
-      describe('without any listeners registered', function () {
-        it("returns an empty array", function () {
-          expect(library.getListeners()).toEqual([]);
-        });
-      });
-
-      describe('with a listeners registered', function () {
-        var listener;
-
-        beforeEach(function () {
-          listener = createSpy('sample listener');
-          library.registerListener(listener);
-        });
-
-        it("returns the registered listeners", function () {
-          expect(library.getListeners()).toEqual([listener]);
-        });
-      });
-    });
-
-    describe('registerHandler()', function () {
-      var eventName, handler, listener;
-
-      beforeEach(function () {
-        eventName = 'eventName';
-        handler = createSpy('sampleHandler');
-        listener = createSpyWithStubs("listener",  {setHandlerForEvent: null});
-        spyOn(Cucumber, 'Listener').and.returnValue(listener);
-        spyOn(library, 'registerListener');
-        library.registerHandler(eventName, handler);
-      });
-
-      it('creates a listener to the listener collection', function () {
-        expect(listener.setHandlerForEvent).toHaveBeenCalledWithValueAsNthParameter(eventName, 1);
-        expect(listener.setHandlerForEvent).toHaveBeenCalledWithValueAsNthParameter(handler, 2);
-      });
-
-      it("registers the listener", function () {
-        expect(library.registerListener).toHaveBeenCalledWith(listener);
       });
     });
   });

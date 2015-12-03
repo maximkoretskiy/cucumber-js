@@ -412,25 +412,32 @@ this.After(function (scenario, callback) {
 });
 ```
 
-##### After features event
+##### Lifecycle hooks
 
-The *after features event* is emitted once all features have been executed, just before the process exits. It can be used for tasks such as closing your browser after running automated browser tests with [selenium](https://code.google.com/p/selenium/wiki/WebDriverJs) or [phantomjs](http://phantomjs.org/).
+For setup and teardown, unrelated to scenarios, you can use `BeforeAll` and `AfterAll` hooks.
+It can be used for tasks such as opening and closing your browser when running automated browser tests with [selenium](https://code.google.com/p/selenium/wiki/WebDriverJs) or [phantomjs](http://phantomjs.org/).
 
-note: There are "Before" and "After" events for each of the following: "Features", "Feature", "Scenario", "Step" as well as the standalone events "Background" and "StepResult". e.g. "BeforeScenario".
+Like other hooks, it can use callbacks, return a promise, or be synchronous.
+Unlike other hooks, there is no world instance available.
 
 ```javascript
-// features/support/after_hooks.js
-var myAfterHooks = function () {
-  this.registerHandler('AfterFeatures', function (event, callback) {
+// features/support/lifecycle_hooks.js
+var myLifecycleHooks = function () {
+  this.BeforeAll(function (callback) {
+    // initialize!
+    callback();
+  });
+
+  this.AfterAll(function (callback) {
     // clean up!
-    // Be careful, there is no World instance available on `this` here
-    // because all scenarios are done and World instances are long gone.
     callback();
   });
 }
 
-module.exports = myAfterHooks;
+module.exports = myLifecycleHooks;
 ```
+
+If a lifecycle hook throws an error, it is output to `stderr`, and the process immediately exits with status 1.
 
 ### CLI
 
