@@ -40,12 +40,14 @@ Feature: Command line interface
       """
       U
 
-      1) some scenario # features/a.feature
-        When a step is undefined
-          this.When(/^a step is undefined$/, function (callback) {
-            // Write code here that turns the phrase above into concrete actions
-            callback.pending();
-          });
+      Undefined Steps:
+
+        1) Scenario: some scenario # features/a.feature
+          When a step is undefined
+            this.When(/^a step is undefined$/, function (callback) {
+              // Write code here that turns the phrase above into concrete actions
+              callback.pending();
+            });
 
       1 scenario (1 undefined)
       1 step (1 undefined)
@@ -137,9 +139,11 @@ Scenario: run a single failing feature
       """
       F
 
-      1) some scenario # features/a.feature:2
-        When a step is failing # features/step_definitions/cucumber_steps.js:2
-          forced error
+      Failures:
+
+        1) Scenario: some scenario # features/a.feature:2
+          When a step is failing # features/step_definitions/cucumber_steps.js:2
+            forced error
 
       1 scenario (1 failed)
       1 step (1 failed)
@@ -169,9 +173,10 @@ Scenario: run a single failing feature
       """
       F
 
-      1) some scenario # features/a.feature:2
-        When a step is failing # features/step_definitions/cucumber_steps.js:2
-          forced error
+      Failures:
+        1) Scenario: some scenario # features/a.feature:2
+          When a step is failing # features/step_definitions/cucumber_steps.js:2
+            forced error
 
       1 scenario (1 failed)
       1 step (1 failed)
@@ -207,9 +212,11 @@ Scenario: run a single failing feature
       """
       F
 
-      1) some scenario # features/a.feature:2
-        When a step is failing # features/step_definitions/cucumber_steps.js:2
-          forced error
+      Failures:
+
+        1) some scenario # features/a.feature:2
+          When a step is failing # features/step_definitions/cucumber_steps.js:2
+            forced error
 
       1 scenario (1 failed)
       1 step (1 failed)
