@@ -1,8 +1,48 @@
-# Cucumber.js changelog
+### [master (unreleased)](https://github.com/cucumber/cucumber-js/compare/v0.9.2...master)
 
-## [v0.8.x](https://github.com/cucumber/cucumber-js/compare/v0.8.0...master)
+### [0.9.2](https://github.com/cucumber/cucumber-js/compare/v0.9.1...v0.9.2)
 
-### [master (unreleased)](https://github.com/cucumber/cucumber-js/compare/v0.8.1...master)
+#### New Features
+
+* Bump stack-chain (Rick Lee-Morlang)
+
+### [0.9.1](https://github.com/cucumber/cucumber-js/compare/v0.9.0...v0.9.1)
+
+#### New Features
+
+* Add rerun formatter (Charlie Rudolph)
+
+#### Fixes
+
+* Add ability to execute scenario outline example (Charlie Rudolph)
+* Support tags on scenario outline examples (Charlie Rudolph)
+
+#### Documentation
+
+* Fix invalid hook documentation (Charlie Rudolph)
+
+### [0.9.0](https://github.com/cucumber/cucumber-js/compare/v0.8.1...v0.9.0)
+
+#### Breaking changes
+
+* catch ambiguous step definitions (Charlie Rudolph)
+* remove use of domain (Charlie Rudolph)
+
+#### New Features
+
+* pretty formatter: source shows step definition location (Charlie Rudolph)
+* support node 5 (Charlie Rudolph)
+
+#### Fixes
+
+* Fix `Api.Scenario#attach` callback handling (Julien Biezemans)
+
+#### Documentation
+
+* Add async example to README (Artem Bronitsky)
+* Document hooks sync/async protocols (Julien Biezemans)
+* Remove useless callbacks in documentation (Julien Biezemans)
+* Fix browser example (Karine Pires)
 
 ### [v0.8.1](https://github.com/cucumber/cucumber-js/compare/v0.8.0...v0.8.1)
 

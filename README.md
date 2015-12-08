@@ -78,17 +78,12 @@ function World() {
   };
 }
 
-// Should you need asynchronous operations when World is intantiated (i.e. before every scenario), use a hook with a callback or returning a promise (see Hooks below for more information):
-function Before(callback) {
-  var server = require('http').createServer();
-  server.listen(8080, callback);
-}
-
 module.exports = function() {
   this.World = World;
-  this.Before = Before;
 };
 ```
+
+If you need to perform operations before/after every scenario, use [hooks](#hooks).
 
 #### Step Definitions
 
@@ -461,6 +456,9 @@ $ ./node_modules/.bin/cucumber.js
   * `$ cucumber.js features/my_feature.feature`
 * Specify a scenario by its line number
   * `$ cucumber.js features/my_feature.feature:3`
+* Specify a scenario by its name matching a regular expression
+  * `$ cucumber.js --name "topic 1"`
+  * If used multiple times, the scenario name needs to match only one of the names supplied
 * Use [Tags](#tags)
 
 #### Requiring support files
@@ -479,9 +477,11 @@ If PATH is supplied, it prints to the given file.
 If multiple formats are specified with the same output, only the last is used.
 
 Built-in formatters
+* json - prints the feature as JSON
 * pretty - prints the feature as is (default)
 * progress - prints one character per scenario
-* json - prints the feature as JSON
+* rerun - prints the paths of the failing scenarios ([example](/features/rerun_formatter.feature))
+  * suggested use: add the rerun formatter to your default profile and the output file to your `.gitignore`
 * summary - prints a summary only, after all scenarios were executed
 
 #### Tags
