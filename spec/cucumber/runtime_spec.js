@@ -43,7 +43,7 @@ describe("Cucumber.Runtime", function () {
     it("fails when the passed callback is not a function", function () {
       var exception;
       try { runtime.start("some string"); } catch(err) { exception = err; }
-      expect(exception).toBeUnDefined();
+      expect(exception).toBeDefined();
     });
 
     it("gets the features", function () {
