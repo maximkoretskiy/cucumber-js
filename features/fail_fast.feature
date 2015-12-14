@@ -28,7 +28,9 @@ Feature: Fail fast
         Scenario: Failing
           Given a failing step
 
-      1) Failing # features/a.feature:2
+      Failures:
+
+      1) Scenario: Failing # features/a.feature:2
         Given a failing step # features/step_definitions/cucumber_steps.js:2
           fail
 

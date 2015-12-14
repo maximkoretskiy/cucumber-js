@@ -22,11 +22,11 @@ Feature: Ambiguous Steps
 
       Failures:
 
-        1) Scenario: a scenario name # features/a.feature:2
-          Given a ambiguous step
-            Multiple step definitions match:
-              /^a ambiguous step$/ # features/step_definitions/cucumber_steps.js:2
-              /^a (.*) step$/      # features/step_definitions/cucumber_steps.js:3
+      1) Scenario: a scenario name # features/a.feature:2
+        Given a ambiguous step
+          Multiple step definitions match:
+            /^a ambiguous step$/ # features/step_definitions/cucumber_steps.js:2
+            /^a (.*) step$/      # features/step_definitions/cucumber_steps.js:3
 
       1 scenario (1 ambiguous)
       1 step (1 ambiguous)

@@ -6,7 +6,7 @@ Feature: Failed scenarios
     Given a file named "features/a.feature" with:
       """
       Feature: some feature
-        Scenario:
+        Scenario: some scenario
           When a step is failing
       """
     And a file named "features/step_definitions/cucumber_steps.js" with:
@@ -23,7 +23,9 @@ Feature: Failed scenarios
       """
       F
 
-      1) some scenario # features/a.feature:2
+      Failures:
+
+      1) Scenario: some scenario # features/a.feature:2
         When a step is failing # features/step_definitions/cucumber_steps.js:2
           forced error
 
@@ -41,8 +43,10 @@ Feature: Failed scenarios
       """
       F
 
-      1) some scenario # features/a.feature:2
-        When a step is failing # features/step_definitions/cucumber_steps.js:2
+      Failures:
+
+      1) Scenario: some scenario # ../a.feature:2
+        When a step is failing # ../step_definitions/cucumber_steps.js:2
           forced error
 
       1 scenario (1 failed)

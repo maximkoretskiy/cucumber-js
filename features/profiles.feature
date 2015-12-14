@@ -75,8 +75,8 @@ Feature: default command line arguments
       """
       Feature: some feature
 
-        Scenario: some scenario   # features/a.feature:2
-          Given a passing step    # features/step_definitions/cucumber_steps.js:2
+        Scenario: some scenario
+          Given a passing step
 
       1 scenario (1 passed)
       1 step (1 passed)

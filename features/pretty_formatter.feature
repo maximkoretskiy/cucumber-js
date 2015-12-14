@@ -57,8 +57,8 @@ Feature: Pretty Formatter
       """
       Feature: some feature
 
-        Scenario: I've declared one step which passes   # features/a.feature:3
-          Given This step is passing                    # features/step_definitions/cucumber_steps.js:2
+        Scenario: I've declared one step which passes
+          Given This step is passing
 
       1 scenario (1 passed)
       1 step (1 passed)
@@ -98,8 +98,10 @@ Feature: Pretty Formatter
         Scenario: I've declared one step and it is passing
           Given This step is passing
 
-      1) I've declared one step and it is passing # features/a.feature:3
-        Before # features/support/hooks.js:2
+      Failures:
+
+      1) Scenario: I've declared one step and it is passing # features/a.feature:3
+        Before  # features/support/hooks.js:2
           Fail
 
       1 scenario (1 failed)
@@ -160,13 +162,13 @@ Feature: Pretty Formatter
       """
       Feature: some feature
 
-        Scenario: some scenario        # features/a.feature:3
-          Given a basic step           # features/step_definitions/cucumber_steps.js:2
-          And a step with a doc string # features/step_definitions/cucumber_steps.js:3
+        Scenario: some scenario
+          Given a basic step
+          And a step with a doc string
             \"\"\"
             my doc string
             \"\"\"
-          And a basic step             # features/step_definitions/cucumber_steps.js:2
+          And a basic step
 
       1 scenario (1 passed)
       3 steps (3 passed)
