@@ -22,6 +22,13 @@ Cucumber.js is tested on:
 * Safari
 * Opera
 
+To see an example of `cucumber-js` in a browser:
+
+* clone the repository
+* `$ npm install`
+* `$ node example/server.js`
+* visit `http://localhost:9797`
+
 ## Usage
 
 ### Install
@@ -46,11 +53,11 @@ $ npm install --save-dev cucumber
 Features are written with the [Gherkin syntax](https://github.com/cucumber/cucumber/wiki/Gherkin)
 
 ``` gherkin
-# features/myFeature.feature
+# features/my_feature.feature
 
 Feature: Example feature
-  As a user of cucumber.js
-  I want to have documentation on cucumber
+  As a user of Cucumber.js
+  I want to have documentation on Cucumber
   So that I can concentrate on building awesome applications
 
   Scenario: Reading documentation
@@ -59,7 +66,7 @@ Feature: Example feature
     Then I should see "Usage" as the page title
 ```
 
-### Support Files
+### Support files
 
 Support files let you setup the environment in which steps will be run, and define step definitions.
 
@@ -85,9 +92,9 @@ module.exports = function() {
 
 If you need to perform operations before/after every scenario, use [hooks](#hooks).
 
-#### Step Definitions
+#### Step definitions
 
-Step definitions are the glue between features written in Gherkin and the actual *SUT* (*system under test*). They are written in JavaScript.
+Step definitions are the glue between features written in Gherkin and the actual system under test. They are written in JavaScript.
 
 All step definitions will run with `this` set to what is known as the *[World](https://github.com/cucumber/cucumber/wiki/A-Whole-New-World)* in Cucumber. It's an object exposing useful methods, helpers and variables to your step definitions. A new instance of `World` is created before each scenario.
 
@@ -98,7 +105,7 @@ Those wrappers are run before executing the feature suite. `this` is an object h
 Step definitions are run when steps match their name. `this` is an instance of `World`.
 
 ``` javascript
-// features/step_definitions/myStepDefinitions.js
+// features/step_definitions/my_step_definitions.js
 
 module.exports = function () {
   this.Given(/^I am on the Cucumber.js GitHub repository$/, function (callback) {
@@ -152,7 +159,7 @@ Simply omit the last `callback` parameter and return the promise.
 Often, asynchronous behaviour is not needed in step definitions. Simply omit the callback parameter, do not return anything and Cucumber will treat the step definition function as synchronous:
 
 ``` javascript
-this.Given(/^I add one Cucumber$/, function () {
+this.Given(/^I add one cucumber$/, function () {
   // Notice how `callback` is omitted from the parameters
   this.cucumberCount += 1;
 });
@@ -179,7 +186,7 @@ this.Then('I should see "$title" as the page title', function (title, callback) 
 
 `'I have $count "$string"'` would translate to `/^I have (.*) "([^"]*)"$/`.
 
-##### Data Table
+##### Data table
 
 When steps have a data table, they are passed an object with methods that can be used to access the data.
 
@@ -443,7 +450,7 @@ If a lifecycle hook throws an error, it is output to `stderr`, and the process i
 
 Cucumber.js includes a binary file to execute the features.
 
-If you installed cucumber.js globally, you may run it with:
+If you installed Cucumber.js globally, you may run it with:
 
 ``` shell
 $ cucumber.js
@@ -455,7 +462,7 @@ If you installed Cucumber locally, you may need to specify the path to the binar
 $ ./node_modules/.bin/cucumber.js
 ```
 
-**Note to Windows users:** invoke Cucumber.js with `cucumber-js` instead of `cucumber.js`. The latter is causing the operating system to invoke JScript instead of Node.js, because of the so-called file extension.
+**Note to Windows users:** invoke Cucumber.js with `cucumber-js` instead of `cucumber.js`. The latter is causing the operating system to invoke JScript instead of Node.js, because of the file extension.
 
 #### Running specific features
 
@@ -503,18 +510,19 @@ Use `--tags <EXPRESSION>` to run specific features or scenarios.
 #### Transpilers
 
 Step definitions and support files can be written in other languages that transpile to javascript.
-This done with the CLI option `--compiler <file_extension>:<module_name>`.
-Below are some examples
+To do this use the CLI option `--compiler <file_extension>:<module_name>`.
+Running `require("<module_name>")`, should make it possible to require files with the given extension.
+As an example, load [CoffeeScript](https://www.npmjs.com/package/coffee-script) support files with `--compiler coffee:coffee-script/register`.
 
-* [CoffeeScript](https://www.npmjs.com/package/coffee-script): `--compiler coffee:coffee-script/register`
-* [TypeScript](https://www.npmjs.com/package/ts-node): `--compiler ts:ts-node/register`
-* [Pogo](https://www.npmjs.com/package/pogo): `--compiler pogo:pogo`
-
-### Custom Snippet Syntax
+### Custom snippet syntax
 
 Undefined steps snippets are printed in javascript by default.
-Custom snippet snytaxes can be used with `--snippet-syntax <FILE>`.
+Custom snippet syntaxes can be used with `--snippet-syntax <FILE>`.
 See [here](/features/step_definition_snippets_custom_syntax.feature) for an example.
+
+### Profiles
+
+In order to store and reuse commonly used CLI options, you can add a `cucumber.js` file to your project root directory. The file should export an object where the key is the profile name and the value is a string of CLI options. The profile can be applied with `-p <NAME>` or `--profile <NAME>`. This will prepend the profile's CLI options to the ones provided by the command line. Multiple profiles can be specified at a time. If no profile is specified and a profile named `default` exists, it will be applied.
 
 ##### Building a custom snippet syntax
 
