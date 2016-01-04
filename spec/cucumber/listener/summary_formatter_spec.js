@@ -117,65 +117,6 @@ describe("Cucumber.Listener.SummaryFormatter", function () {
     });
   });
 
-  describe("handleAfterScenarioEvent()", function () {
-    var event, callback;
-
-    beforeEach(function () {
-      event    = createSpy("event");
-      callback = createSpy("callback");
-      spyOnStub(statsJournal, 'isCurrentScenarioFailing');
-    });
-
-    it("checks whether the current scenario failed", function () {
-      summaryFormatter.handleAfterScenarioEvent(event, callback);
-      expect(statsJournal.isCurrentScenarioFailing).toHaveBeenCalled();
-    });
-
-    describe("when the current scenario failed", function () {
-      var scenario;
-
-      beforeEach(function () {
-        scenario = createSpy("scenario");
-        statsJournal.isCurrentScenarioFailing.and.returnValue(true);
-        spyOn(summaryFormatter, 'storeFailedScenario');
-        spyOnStub(event, 'getPayloadItem').and.returnValue(scenario);
-      });
-
-      it("gets the scenario from the payload", function () {
-        summaryFormatter.handleAfterScenarioEvent(event, callback);
-        expect(event.getPayloadItem).toHaveBeenCalledWith('scenario');
-      });
-
-      it("stores the failed scenario", function () {
-        summaryFormatter.handleAfterScenarioEvent(event, callback);
-        expect(summaryFormatter.storeFailedScenario).toHaveBeenCalledWith(scenario);
-      });
-    });
-
-    describe("when the current scenario did not fail", function () {
-      beforeEach(function () {
-        statsJournal.isCurrentScenarioFailing.and.returnValue(false);
-        spyOn(summaryFormatter, 'storeFailedScenario');
-        spyOnStub(event, 'getPayloadItem');
-      });
-
-      it("does not get the scenario from the payload", function () {
-        summaryFormatter.handleAfterScenarioEvent(event, callback);
-        expect(event.getPayloadItem).not.toHaveBeenCalled();
-      });
-
-      it("does not store the failed scenario", function () {
-        summaryFormatter.handleAfterScenarioEvent(event, callback);
-        expect(summaryFormatter.storeFailedScenario).not.toHaveBeenCalled();
-      });
-    });
-
-    it("calls back", function () {
-      summaryFormatter.handleAfterScenarioEvent(event, callback);
-      expect(callback).toHaveBeenCalled();
-    });
-  });
-
   describe("handleAfterFeaturesEvent()", function () {
     var callback, event;
 
@@ -292,40 +233,6 @@ describe("Cucumber.Listener.SummaryFormatter", function () {
     it("appends the snippet to the undefined step log buffer", function () {
       summaryFormatter.storeUndefinedStepResult(stepResult);
       expect(summaryFormatter.appendStringToUndefinedStepLogBuffer).toHaveBeenCalledWith(snippet);
-    });
-  });
-
-  describe("getFailedScenarioLogBuffer() [appendStringToFailedScenarioLogBuffer()]", function () {
-    it("returns the logged failed scenario details", function () {
-      summaryFormatter.appendStringToFailedScenarioLogBuffer("abc");
-      expect(summaryFormatter.getFailedScenarioLogBuffer()).toBe("abc\n");
-    });
-
-    it("returns all logged failed scenario lines joined with a line break", function () {
-      summaryFormatter.appendStringToFailedScenarioLogBuffer("abc");
-      summaryFormatter.appendStringToFailedScenarioLogBuffer("def");
-      expect(summaryFormatter.getFailedScenarioLogBuffer()).toBe("abc\ndef\n");
-    });
-  });
-
-  describe("getUndefinedStepLogBuffer() [appendStringToUndefinedStepLogBuffer()]", function () {
-    it("returns the logged undefined step details", function () {
-      summaryFormatter.appendStringToUndefinedStepLogBuffer("abc");
-      expect(summaryFormatter.getUndefinedStepLogBuffer()).toBe("abc\n");
-    });
-
-    it("returns all logged failed scenario lines joined with a line break", function () {
-      summaryFormatter.appendStringToUndefinedStepLogBuffer("abc");
-      summaryFormatter.appendStringToUndefinedStepLogBuffer("def");
-      expect(summaryFormatter.getUndefinedStepLogBuffer()).toBe("abc\ndef\n");
-    });
-  });
-
-  describe("appendStringToUndefinedStepLogBuffer() [getUndefinedStepLogBuffer()]", function () {
-    it("does not log the same string twice", function () {
-      summaryFormatter.appendStringToUndefinedStepLogBuffer("abcdef");
-      summaryFormatter.appendStringToUndefinedStepLogBuffer("abcdef");
-      expect(summaryFormatter.getUndefinedStepLogBuffer()).toBe("abcdef\n");
     });
   });
 
