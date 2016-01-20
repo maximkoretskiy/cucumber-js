@@ -47,7 +47,7 @@ var cliSteps = function cliSteps() {
     var actualOutput = this.lastRun.stdout;
 
     actualOutput = normalizeText(actualOutput);
-    expectedOutput = normalizeText(expectedOutput);
+    expectedOutput = normalizeText(expectedOutput + '\n');
 
     if (actualOutput !== expectedOutput)
       throw new Error('Expected output to match the following:\n' + expectedOutput + '\n' +
